@@ -28,21 +28,34 @@ const readline = require('readline-sync');
 
 const hasTorch = true;
 const hasMap = false;
+const hasSword = true;
+const hasCompass = true;
 
-console.log("You see two paths: one leads to the mountains, the other to the village.");
+console.log("You wake up in a dark forest. Two paths lie ahead.");
+console.log("You can use your torch, map, sword, and compass to guide your journey.");
 const choice = readline.question("Do you go to the 'mountains' or the 'village'?");
 
-if (choice === "mountains" && hasTorch) {
-  console.log("You safely navigate through the dark mountains.");
-} else if (choice === "mountains" && !hasTorch) {
-  console.log("It's too dark to proceed. You decide to turn back.");
-} else if (choice === "village" || hasMap) {
-  console.log("You find your way to the village.");
+if (choice === "mountains") {
+  if (hasTorch && hasCompass) {
+    console.log("The torch and compass guide you safely through the mountain pass.");
+  } else if (hasTorch || hasCompass) {
+    console.log("You move forward, but the path is risky and you nearly lose your way.");
+  } else {
+    console.log("It is too dark to continue. You turn back.");
+  }
+} else if (choice === "village") {
+  if (hasMap || hasCompass) {
+    console.log("Your supplies help you find the village without getting lost.");
+  } else if (!hasMap && !hasCompass) {
+    console.log("You wander aimlessly and never reach the village.");
+  } else {
+    console.log("You reach a small roadside camp, but the path remains uncertain.");
+  }
 } else {
-  console.log("You get lost and wander aimlessly.");
+  console.log("You hesitate too long and the forest swallows the moment.");
 }
 
-/* 
+/*
 
 Add Customization and expand the game:
   - Add more choices and scenarios.
